@@ -1,94 +1,89 @@
-## 🧪 Desafio Técnico — Automação de Consulta e Extração de Dados
+# Desafio Técnico: Automação de Consulta e Extração de Dados
 
-Bem-vindo(a)! Este repositório contém as instruções do teste prático para candidatos(as) à vaga de desenvolvimento.
+Este projeto contém uma solução para o desafio técnico proposto, focado na automação de login, extração e processamento de dados de um site de e-commerce de teste, e aplicação de uma regra de negócio para seleção de produtos.
 
-O objetivo é avaliar sua capacidade de automatizar login, navegar, extrair, processar dados e aplicar uma regra de negócio simples, gerando saídas organizadas.
+## Sumário
 
-### 📚 Contexto
-Somos uma promotora de crédito e precisamos consultar informações em um portal parceiro para validar dados. Seu desafio é criar um robô que execute os passos abaixo usando um site público de testes.
+- [Visão Geral](#visão-geral)
+- [Requisitos do Ambiente](#requisitos-do-ambiente)
+- [Instalação](#instalação)
+- [Execução](#execução)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Arquivos de Saída](#arquivos-de-saída)
+- [Considerações Finais](#considerações-finais)
 
-### 🌐 Site de Teste
-- Use o `https://www.saucedemo.com/` (e-commerce de testes com login).
-- As credenciais ficam na própria página. Exemplos úteis:
-  - 👤 Usuário: `standard_user`
-  - 🔑 Senha: `secret_sauce`
+## Visão Geral
 
-### ✅ Requisitos do Desafio
-1. 🔐 Login
-   - Acesse a página de login e autentique com as credenciais fornecidas.
-   - O robô deve identificar e validar se o login foi bem-sucedido.
+A automação realiza as seguintes etapas:
 
-2. 🧾 Extração de Dados
-   - Após o login, navegue até a página de produtos.
-   - Extraia para cada produto: `Nome` e `Preço`.
+1.  **Login**: Autentica no site `https://www.saucedemo.com/` com credenciais pré-definidas.
+2.  **Extração de Dados**: Navega até a página de produtos e extrai o nome e o preço de cada item.
+3.  **Processamento de Dados**: Converte os preços extraídos para um formato numérico (float).
+4.  **Regra de Negócio**: Adiciona ao carrinho apenas os produtos cujo preço é inferior a $20.00.
+5.  **Geração de Saída**: Gera dois arquivos de saída: um CSV com todos os produtos e seus preços numéricos, e um TXT com os nomes dos produtos selecionados.
 
-3. 🧮 Processamento de Dados
-   - Remova o cifrão `$` do preço.
-   - Converta o preço para um número (float/decimal).
+## Requisitos do Ambiente
 
-4. ⚖️ Regra de Negócio (Ação Condicional)
-   - 🛒 Adicione ao carrinho apenas os produtos com preço menor que `$20.00`.
+Para executar este projeto, você precisará ter instalado:
 
-5. 📄 Geração de Saída
-   - Gere os arquivos ao final da execução:
-     - `todos_os_produtos.csv`: colunas `Nome` e `Preco_Numerico`.
-     - `produtos_selecionados.txt`: relação simples dos nomes dos produtos adicionados ao carrinho.
+-   Python 3.x
+-   pip (gerenciador de pacotes do Python)
 
-### 🧰 Linguagem e Ferramentas
-- Use a linguagem na qual você é mais produtivo(a). Python é uma ótima opção.
-- Ferramentas sugeridas (não obrigatório):
-  - Python: Selenium, Playwright, Requests (quando aplicável), Pandas (para CSV).
-  - Node.js/TS: Playwright, Puppeteer.
-  - Outras stacks são bem-vindas se cumprirem os requisitos.
+## Instalação
 
-### 📦 O que esperamos no repositório
-- Código-fonte completo da automação.
-- Um `README.md` próprio explicando:
-  - Pré-requisitos de ambiente.
-  - Como instalar dependências.
-  - Como executar o robô (comando único preferencial).
-  - Como configurar variáveis de ambiente (se houver).
-- Os arquivos de saída gerados (`todos_os_produtos.csv` e `produtos_selecionados.txt`) não precisam ser commitados, mas descreva onde serão criados.
+1.  **Clone o repositório** (se aplicável, ou crie um diretório para o projeto):
 
-### 🧭 Critérios de Avaliação
-- Correção funcional (login, extração, processamento, regra de negócio, geração de arquivos).
-- Clareza e organização do código (nomes, estruturas, modularização).
-- Robustez (tratamento de erros, esperas explícitas/implícitas, seletor resiliente).
-- Reprodutibilidade (facilidade de executar do zero seguindo seu README).
-- Boas práticas (separação de camadas, logs mínimos, formatação/linters, `.gitignore`).
-- Testes (bônus se incluir testes automatizados para partes críticas/parse e regras).
+    ```bash
+    git clone <URL_DO_REPOSITORIO>
+    cd <DIRETORIO_DO_PROJETO>
+    ```
 
-### ✨ Bônus (opcional)
-- Containerização com Docker (execução em um único comando).
-- Pipeline simples de CI (lint/test/build).
-- Parametrização de ambiente (ex.: usuários diferentes por variável de ambiente).
+2.  **Crie e ative um ambiente virtual** (recomendado):
 
-### 🚧 Limites e Escopo
-- Evite over-engineering. Mire em conclusão entre 2 a 4 horas.
-- Documente rapidamente escolhas e trade-offs no seu README.
+    ```bash
+    python3 -m venv venv
+    # No Windows:
+    .\venv\Scripts\activate
+    # No Linux/macOS:
+    source venv/bin/activate
+    ```
 
-### 🚀 Como Entregar
-1. Faça um fork deste repositório.
-2. Implemente a solução no seu fork.
-3. Atualize o seu `README.md` com instruções de execução claras.
-4. Envie o link do seu repositório (GitHub/GitLab) para avaliação.
+3.  **Instale as dependências**:
 
-### 🗂️ Sugestão de Estrutura (opcional)
+    ```bash
+    pip install selenium pandas
+    ```
+
+## Execução
+
+Para executar a automação, navegue até o diretório raiz do projeto e execute o seguinte comando:
+
+```bash
+python main.py
+```
+
+## Estrutura do Projeto
+
 ```
 .
-├─ src/                  # seu código-fonte
-├─ tests/                # seus testes (opcional)
-├─ README.md             # instruções de execução do candidato
-├─ requirements.txt      # se usar Python (opcional)
-└─ package.json          # se usar Node.js (opcional)
+├── main.py
+└── README.md
 ```
 
-### ▶️ Diretrizes de Execução (exemplo em Python — opcional)
-- Documente no seu README algo como:
-  - Criação de ambiente: `python -m venv .venv && .venv\\Scripts\\activate` (Windows) ou `source .venv/bin/activate` (Unix)
-  - Instalação: `pip install -r requirements.txt`
-  - Execução: `python -m src.main`
+-   `main.py`: Contém o código principal da automação, incluindo a lógica de login, extração, processamento e geração de arquivos.
+-   `README.md`: Este arquivo de documentação.
 
-Boa sorte! Estamos interessados em ver seu raciocínio, organização e qualidade de entrega tanto quanto o resultado final.
+## Arquivos de Saída
+
+Após a execução, dois arquivos serão gerados no mesmo diretório do script `main.py`:
+
+-   `todos_os_produtos.csv`: Um arquivo CSV contendo duas colunas: `Nome` e `Preco_Numerico`. Lista todos os produtos encontrados no site com seus preços convertidos.
+-   `produtos_selecionados.txt`: Um arquivo de texto simples, onde cada linha contém o nome de um produto que foi adicionado ao carrinho (ou seja, com preço inferior a $20.00).
+
+## Considerações Finais
+
+O protótipo foi desenvolvido utilizando o Selenium WebDriver para interação com o navegador e o Pandas para manipulação de dados. A abordagem de seleção de elementos foi baseada em IDs e nomes de classes para garantir robustez. O modo headless do Chrome foi utilizado para execução em segundo plano.
+
+Este README.md foi gerado automaticamente como parte do processo de documentação do projeto.
 
 
