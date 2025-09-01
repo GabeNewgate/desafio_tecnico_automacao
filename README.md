@@ -84,6 +84,4 @@ Após a execução, dois arquivos serão gerados no mesmo diretório do script `
 
 O protótipo foi desenvolvido utilizando o Selenium WebDriver para interação com o navegador e o Pandas para manipulação de dados. A abordagem de seleção de elementos foi baseada em IDs e nomes de classes para garantir robustez. O modo headless do Chrome foi utilizado para execução em segundo plano.
 
-Este README.md foi gerado automaticamente como parte do processo de documentação do projeto.
-
 
